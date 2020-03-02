@@ -2,7 +2,6 @@ package ru.spbstu.semwai
 
 import org.kohsuke.args4j.CmdLineException
 import org.kohsuke.args4j.CmdLineParser
-import org.kohsuke.args4j.ExampleMode.ALL
 import org.kohsuke.args4j.Option
 import org.kohsuke.args4j.spi.StringArrayOptionHandler
 
@@ -16,8 +15,8 @@ class Tar(args: Array<String>) {
     @Option(name = "-u", usage = "Unpack", required = false)
     var unpackFlag = false
 
-    @Option(name = "-out", usage = "Output file name", required = true)
-    var outputFile = ""
+    @Option(name = "-out", usage = "Output file name", required = false)
+    var outputFile = "out.tar"
 
 
     init {
@@ -31,23 +30,13 @@ class Tar(args: Array<String>) {
         }
         inputFiles.removeAt(0)
 
-
-        println(unpackFlag)
-        println(outputFile)
-        println(inputFiles)
-
         require(inputFiles.size > 0) { print("no input") }
 
-
         if (unpackFlag) {
-            //распаковываем
+            println("Untar ->")
+            UnTarEngine(inputFiles[0]).run()
         } else {
             TarEngine(inputFiles, outputFile).run()
         }
     }
-}
-
-
-fun main(args: Array<String>) {
-    Tar(args)
 }

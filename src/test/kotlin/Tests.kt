@@ -1,13 +1,14 @@
-import junit.framework.Assert.assertEquals
+
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+
 import ru.spbstu.semwai.Tar
 import java.io.File
 
-class Test {
+class Tests {
 
-    val path = "src/test/kotlin";
+    val path = "src/test/kotlin"
     val f1 = "$path/1.txt"
     val f2 = "$path/2.txt"
     val f3 = "$path/3.jpg"
@@ -26,11 +27,13 @@ class Test {
 
     @Test
     fun test1() {
-
-
-        Tar("-f $f1 $f2 $f3 -out $fout".split(' ').toTypedArray())
+        //Tar("-f $f1 $f3 $f2 -out $fout".split(' ').toTypedArray())
     }
 
+    @Test
+    fun test2(){
+        Tar("-f $fout -u".split(' ').toTypedArray())
+    }
 
     @After
     fun clear(){

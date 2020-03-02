@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="kotlintar" default="all">
+  
+  
+  <property file="kotlintar.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.klib"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.gradle:_args4j:args4j:2.33.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/args4j/args4j/2.33/bd87a75374a6d6523de82fef51fc3cfe9baf9fc9/args4j-2.33.jar"/>
+  </path>
+  
+  <path id="library.gradle:_junit:junit:4.12.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.hamcrest:hamcrest-core:1.3.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.61/65abb71d5afb850b68be03987b08e2c864ca3110/kotlin-stdlib-common-1.3.61.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.3.61/70dffc5f8ac5ea7c34f30deac5b9d8b1d48af066/kotlin-stdlib-jdk7-1.3.61.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.3.61/e91d61b7cfd9a45566b580fef18bbd5c32d505b5/kotlin-stdlib-jdk8-1.3.61.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.61/4702105e97f7396ae41b113fdbdc180ec1eb1e36/kotlin-stdlib-1.3.61.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jetbrains:annotations:13.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module kotlinTar -->
+  
+  <dirname property="module.kotlintar.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.kotlintar" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.kotlintar" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.kotlintar" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.kotlintar" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="kotlintar.output.dir" value="${module.kotlintar.basedir}/out/production/kotlinTar"/>
+  <property name="kotlintar.testoutput.dir" value="${module.kotlintar.basedir}/out/test/kotlinTar"/>
+  
+  <path id="kotlintar.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="kotlintar.module.production.classpath">
+    <path refid="${module.jdk.classpath.kotlintar}"/>
+  </path>
+  
+  <path id="kotlintar.runtime.production.module.classpath">
+    <pathelement location="${kotlintar.output.dir}"/>
+  </path>
+  
+  <path id="kotlintar.module.classpath">
+    <path refid="${module.jdk.classpath.kotlintar}"/>
+    <pathelement location="${kotlintar.output.dir}"/>
+  </path>
+  
+  <path id="kotlintar.runtime.module.classpath">
+    <pathelement location="${kotlintar.testoutput.dir}"/>
+    <pathelement location="${kotlintar.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.kotlintar">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.kotlintar">
+    <patternset refid="excluded.from.module.kotlintar"/>
+  </patternset>
+  
+  
+  <target name="compile.module.kotlintar" depends="compile.module.kotlintar.production,compile.module.kotlintar.tests" description="Compile module kotlinTar"/>
+  
+  <target name="compile.module.kotlintar.production" depends="register.custom.compilers" description="Compile module kotlinTar; production classes"/>
+  
+  <target name="compile.module.kotlintar.tests" depends="register.custom.compilers,compile.module.kotlintar.production" description="compile module kotlinTar; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.kotlintar" description="cleanup module">
+    <delete dir="${kotlintar.output.dir}"/>
+    <delete dir="${kotlintar.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module kotlinTar.main -->
+  
+  <dirname property="module.kotlintar.main.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.kotlintar.main" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.kotlintar.main" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.kotlintar.main" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.kotlintar.main" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="kotlintar.main.output.dir" value="${module.kotlintar.main.basedir}/build/classes/java/main"/>
+  <property name="kotlintar.main.testoutput.dir" value="${module.kotlintar.main.basedir}/build/classes/java/main"/>
+  
+  <path id="kotlintar.main.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="kotlintar.main.module.production.classpath">
+    <path refid="${module.jdk.classpath.kotlintar.main}"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  <path id="kotlintar.main.runtime.production.module.classpath">
+    <pathelement location="${kotlintar.main.output.dir}"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  <path id="kotlintar.main.module.classpath">
+    <path refid="${module.jdk.classpath.kotlintar.main}"/>
+    <pathelement location="${kotlintar.main.output.dir}"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  <path id="kotlintar.main.runtime.module.classpath">
+    <pathelement location="${kotlintar.main.output.dir}"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.kotlintar.main">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.kotlintar.main">
+    <patternset refid="excluded.from.module.kotlintar.main"/>
+  </patternset>
+  
+  <path id="kotlintar.main.module.sourcepath">
+    <dirset dir="${module.kotlintar.main.basedir}/src/main">
+      <include name="java"/>
+      <include name="kotlin"/>
+      <include name="resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.kotlintar.main" depends="compile.module.kotlintar.main.production,compile.module.kotlintar.main.tests" description="Compile module kotlinTar.main"/>
+  
+  <target name="compile.module.kotlintar.main.production" depends="register.custom.compilers" description="Compile module kotlinTar.main; production classes">
+    <mkdir dir="${kotlintar.main.output.dir}"/>
+    <javac2 destdir="${kotlintar.main.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.kotlintar.main}/javac">
+      <compilerarg line="${compiler.args.kotlintar.main}"/>
+      <bootclasspath refid="kotlintar.main.module.bootclasspath"/>
+      <classpath refid="kotlintar.main.module.production.classpath"/>
+      <src refid="kotlintar.main.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.kotlintar.main"/>
+    </javac2>
+    
+    <copy todir="${kotlintar.main.output.dir}">
+      <fileset dir="${module.kotlintar.main.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.kotlintar.main.basedir}/src/main/kotlin">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.kotlintar.main.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.kotlintar.main.tests" depends="register.custom.compilers,compile.module.kotlintar.main.production" description="compile module kotlinTar.main; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.kotlintar.main" description="cleanup module">
+    <delete dir="${kotlintar.main.output.dir}"/>
+    <delete dir="${kotlintar.main.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module kotlinTar.test -->
+  
+  <dirname property="module.kotlintar.test.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.kotlintar.test" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.kotlintar.test" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.kotlintar.test" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.kotlintar.test" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="kotlintar.test.output.dir" value="undefined"/>
+  <property name="kotlintar.test.testoutput.dir" value="${module.kotlintar.test.basedir}/build/classes/java/test"/>
+  
+  <path id="kotlintar.test.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="kotlintar.test.module.production.classpath">
+    <path refid="${module.jdk.classpath.kotlintar.test}"/>
+    <pathelement location="${kotlintar.main.output.dir}"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_junit:junit:4.12.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  <path id="kotlintar.test.runtime.production.module.classpath">
+    <path refid="kotlintar.main.runtime.production.module.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_junit:junit:4.12.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  <path id="kotlintar.test.module.classpath">
+    <path refid="${module.jdk.classpath.kotlintar.test}"/>
+    <pathelement location="${kotlintar.main.output.dir}"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_junit:junit:4.12.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  <path id="kotlintar.test.runtime.module.classpath">
+    <pathelement location="${kotlintar.test.testoutput.dir}"/>
+    <path refid="kotlintar.main.runtime.module.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61.classpath"/>
+    <path refid="library.gradle:_args4j:args4j:2.33.classpath"/>
+    <path refid="library.gradle:_junit:junit:4.12.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.gradle:_org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61.classpath"/>
+    <path refid="library.gradle:_org.jetbrains:annotations:13.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.kotlintar.test">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.kotlintar.test">
+    <patternset refid="excluded.from.module.kotlintar.test"/>
+  </patternset>
+  
+  <path id="kotlintar.test.module.test.sourcepath">
+    <dirset dir="${module.kotlintar.test.basedir}/src/test">
+      <include name="java"/>
+      <include name="kotlin"/>
+      <include name="resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.kotlintar.test" depends="compile.module.kotlintar.test.production,compile.module.kotlintar.test.tests" description="Compile module kotlinTar.test"/>
+  
+  <target name="compile.module.kotlintar.test.production" depends="register.custom.compilers,compile.module.kotlintar.main" description="Compile module kotlinTar.test; production classes"/>
+  
+  <target name="compile.module.kotlintar.test.tests" depends="register.custom.compilers,compile.module.kotlintar.test.production" description="compile module kotlinTar.test; test classes" unless="skip.tests">
+    <mkdir dir="${kotlintar.test.testoutput.dir}"/>
+    <javac2 destdir="${kotlintar.test.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.kotlintar.test}/javac">
+      <compilerarg line="${compiler.args.kotlintar.test}"/>
+      <bootclasspath refid="kotlintar.test.module.bootclasspath"/>
+      <classpath refid="kotlintar.test.module.classpath"/>
+      <src refid="kotlintar.test.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.kotlintar.test"/>
+    </javac2>
+    
+    <copy todir="${kotlintar.test.testoutput.dir}">
+      <fileset dir="${module.kotlintar.test.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.kotlintar.test.basedir}/src/test/kotlin">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.kotlintar.test.basedir}/src/test/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.kotlintar.test" description="cleanup module">
+    <delete dir="${kotlintar.test.output.dir}"/>
+    <delete dir="${kotlintar.test.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.kotlintar, clean.module.kotlintar.main, clean.module.kotlintar.test" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.kotlintar, compile.module.kotlintar.main, compile.module.kotlintar.test" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.kotlintar:jar" value="${basedir}/out/artifacts/kotlinTar_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.kotlinTar.jar" value="${artifacts.temp.dir}/kotlinTar.jar"/>
+  </target>
+  
+  <target name="artifact.kotlintar:jar" depends="init.artifacts, compile.module.kotlintar.main" description="Build &#39;kotlinTar:jar&#39; artifact">
+    <property name="artifact.temp.output.kotlintar:jar" value="${artifacts.temp.dir}/kotlinTar_jar"/>
+    <mkdir dir="${artifact.temp.output.kotlintar:jar}"/>
+    <jar destfile="${temp.jar.path.kotlinTar.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${kotlintar.main.output.dir}"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.3.61/70dffc5f8ac5ea7c34f30deac5b9d8b1d48af066/kotlin-stdlib-jdk7-1.3.61.jar"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.61/4702105e97f7396ae41b113fdbdc180ec1eb1e36/kotlin-stdlib-1.3.61.jar"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/args4j/args4j/2.33/bd87a75374a6d6523de82fef51fc3cfe9baf9fc9/args4j-2.33.jar"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.3.61/e91d61b7cfd9a45566b580fef18bbd5c32d505b5/kotlin-stdlib-jdk8-1.3.61.jar"/>
+      <zipfileset src="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.61/65abb71d5afb850b68be03987b08e2c864ca3110/kotlin-stdlib-common-1.3.61.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.kotlinTar.jar}" tofile="${artifact.temp.output.kotlintar:jar}/kotlinTar.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.kotlintar:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.kotlintar:jar}"/>
+    <copy todir="${artifact.output.kotlintar:jar}">
+      <fileset dir="${artifact.temp.output.kotlintar:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

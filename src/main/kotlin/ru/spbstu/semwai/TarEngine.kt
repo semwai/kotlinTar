@@ -13,11 +13,11 @@ class TarEngine(val files: List<String>, val outputFile: String) {
                metadata += Schema(this.name, this.length())
            }
         }
-        print(metadata)
+        println(metadata)
         with(File(outputFile)){
             createNewFile()
-            appendText("${metadata.size},")
-            appendText(metadata.fold("") { v: String, it: Schema -> v + it.toString()})
+            writeBytes(metadata.fold("") { v: String, it: Schema -> v + it.toString()}.toByteArray())
+            appendBytes(byteArrayOf(0))
 
 
 
