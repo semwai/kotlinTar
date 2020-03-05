@@ -3,24 +3,24 @@ package ru.spbstu.semwai
 import java.io.File
 
 //Задача класса - взять список файлов и запаковать их в 1
-class TarEngine(val files: List<String>, val outputFile: String) {
+class TarEngine(private val files: List<String>, private val outputFile: String) {
 
-    val metadata = mutableListOf<Schema>()
+    private val metadata = mutableListOf<Schema>()
 
-    fun run(){
+    fun run() {
         files.forEach {
-           with(File(it)){
-               metadata += Schema(this.name, this.length())
-           }
+            with(File(it)) {
+                metadata += Schema(this.name, this.length())
+            }
         }
-        println(metadata)
-        with(File(outputFile)){
+        with(File(outputFile)) {
             createNewFile()
-            writeBytes(metadata.fold("") { v: String, it: Schema -> v + it.toString()}.toByteArray())
-            appendBytes(byteArrayOf(0))
-
-
-
+            writeText(
+                metadata.fold("") { v: String, it: Schema ->
+                    v + it.toString()
+                }.dropLast(1)
+            )
+            appendText("!")
             files.forEach {
                 appendBytes(File(it).readBytes())
             }
@@ -28,5 +28,3 @@ class TarEngine(val files: List<String>, val outputFile: String) {
     }
 
 }
-
-

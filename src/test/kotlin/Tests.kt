@@ -1,43 +1,59 @@
-
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
-
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Test
 import ru.spbstu.semwai.Tar
 import java.io.File
+import java.io.FileNotFoundException
+import java.lang.IllegalArgumentException
 
+@Suppress("NonAsciiCharacters")
 class Tests {
+    private val f1 = "1.txt"
+    private val f2 = "2.txt"
+    private val f3 = "3.txt"
+    private val fout = "out.txt"
 
-    val path = "src/test/kotlin"
-    val f1 = "$path/1.txt"
-    val f2 = "$path/2.txt"
-    val f3 = "$path/3.jpg"
-    val fout = "$path/out.tar"
-
-    @Before
-    fun init(){
-        File(f1).run {
+    @Test
+    fun `🐷 проверка работы базового функционала`() {
+        with(File(f1)) {
             writeText("abcdef")
         }
-        File(f2).run {
-            writeText("123456")
+        with(File(f2)) {
+            val str = StringBuilder()
+            for (i in 1..1000000)
+                str.append(i)
+            writeText(str.toString())
         }
 
-    }
-
-    @Test
-    fun test1() {
-        //Tar("-f $f1 $f3 $f2 -out $fout".split(' ').toTypedArray())
-    }
-
-    @Test
-    fun test2(){
+        with(File(f3)) {
+            writeText("123456")
+        }
+        Tar("-f $f1 $f2 $f3 -out $fout".split(' ').toTypedArray())
+        File(f1).delete()
+        File(f2).delete()
+        File(f3).delete()
         Tar("-f $fout -u".split(' ').toTypedArray())
+        assertEquals("abcdef", File(f1).readText())
+        assertEquals("123456", File(f3).readText())
+        File(f1).delete()
+        File(f2).delete()
+        File(f3).delete()
+        File(fout).delete()
     }
-
-    @After
-    fun clear(){
-
+    @Test
+    fun `🐓проверка работы механизма исключений`(){
+        File(fout).delete()
+        assertThrows(FileNotFoundException::class.java) {
+            Tar("-f $fout -u".split(' ').toTypedArray())
+        }
+        File(fout).writeText("hello world")
+        assertThrows(IllegalArgumentException::class.java) {
+            Tar("-f $fout -u".split(' ').toTypedArray())
+        }
+        File(fout).writeText("1.txt 1,2.txt 2a!12")
+        assertThrows(Exception::class.java) {
+            Tar("-f $fout -u".split(' ').toTypedArray())
+        }
+        File(fout).delete()
     }
-
 }

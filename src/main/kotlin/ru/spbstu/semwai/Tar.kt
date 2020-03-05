@@ -4,6 +4,7 @@ import org.kohsuke.args4j.CmdLineException
 import org.kohsuke.args4j.CmdLineParser
 import org.kohsuke.args4j.Option
 import org.kohsuke.args4j.spi.StringArrayOptionHandler
+import kotlin.system.exitProcess
 
 
 class Tar(args: Array<String>) {
@@ -30,12 +31,14 @@ class Tar(args: Array<String>) {
         }
         inputFiles.removeAt(0)
 
-        require(inputFiles.size > 0) { print("no input") }
-
+        if (inputFiles.size == 0) {
+            print("Empty input")
+            exitProcess(-1)
+        }
         if (unpackFlag) {
-            println("Untar ->")
             UnTarEngine(inputFiles[0]).run()
         } else {
+            println("Make tar file")
             TarEngine(inputFiles, outputFile).run()
         }
     }
