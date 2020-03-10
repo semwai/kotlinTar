@@ -3,7 +3,7 @@ package ru.spbstu.semwai
 import java.io.File
 import java.lang.IllegalArgumentException
 
-//Класс занимается распакованием файлов
+//Класс занимается распаковкой файлов
 class UnTarEngine(private val inputFIle: String) {
 
     private val metadata = mutableListOf<Schema>()

@@ -28,11 +28,11 @@ class Tests {
         with(File(f3)) {
             writeText("123456")
         }
-        Tar("-f $f1 $f2 $f3 -out $fout".split(' ').toTypedArray())
+        Tar("$f1 $f2 $f3 -out $fout".split(' ').toTypedArray())
         File(f1).delete()
         File(f2).delete()
         File(f3).delete()
-        Tar("-f $fout -u".split(' ').toTypedArray())
+        Tar("$fout -u".split(' ').toTypedArray())
         assertEquals("abcdef", File(f1).readText())
         assertEquals("123456", File(f3).readText())
         File(f1).delete()
@@ -44,15 +44,15 @@ class Tests {
     fun `🐓проверка работы механизма исключений`(){
         File(fout).delete()
         assertThrows(FileNotFoundException::class.java) {
-            Tar("-f $fout -u".split(' ').toTypedArray())
+            Tar("$fout -u".split(' ').toTypedArray())
         }
         File(fout).writeText("hello world")
         assertThrows(IllegalArgumentException::class.java) {
-            Tar("-f $fout -u".split(' ').toTypedArray())
+            Tar("$fout -u".split(' ').toTypedArray())
         }
         File(fout).writeText("1.txt 1,2.txt 2a!12")
         assertThrows(Exception::class.java) {
-            Tar("-f $fout -u".split(' ').toTypedArray())
+            Tar("$fout -u".split(' ').toTypedArray())
         }
         File(fout).delete()
     }
