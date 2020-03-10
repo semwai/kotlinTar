@@ -18,11 +18,10 @@ class TarEngine(private val files: List<String>, private val outputFile: String)
             writeText(
                 metadata.fold("") { v: String, it: Schema ->
                     v + it.toString()
-                }.dropLast(1)
+                }.dropLast(1) + '!'
             )
-            appendText("!")
             files.forEach {
-                appendBytes(File(it).readBytes())
+                appendText(File(it).readText())
             }
         }
     }
