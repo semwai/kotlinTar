@@ -13,6 +13,8 @@ class Tests {
     private val f3 = "3.txt"
     private val fout = "out.txt"
 
+    private fun runTar(s : String) = Tar(s.split(' ').toTypedArray())
+
     @Test
     fun `🐷 проверка работы базового функционала`() {
         with(File(f1)) {
@@ -28,11 +30,11 @@ class Tests {
         with(File(f3)) {
             writeText("123456")
         }
-        Tar("$f1 $f2 $f3 -out $fout".split(' ').toTypedArray())
+        runTar("$f1 $f2 $f3 -out $fout")
         File(f1).delete()
         File(f2).delete()
         File(f3).delete()
-        Tar("$fout -u".split(' ').toTypedArray())
+        runTar("$fout -u")
         assertEquals("abcdef", File(f1).readText())
         assertEquals("123456", File(f3).readText())
         File(f1).delete()
@@ -44,15 +46,15 @@ class Tests {
     fun `🐓проверка работы механизма исключений`(){
         File(fout).delete()
         assertThrows(FileNotFoundException::class.java) {
-            Tar("$fout -u".split(' ').toTypedArray())
+            runTar("$fout -u")
         }
         File(fout).writeText("hello world")
         assertThrows(IllegalArgumentException::class.java) {
-            Tar("$fout -u".split(' ').toTypedArray())
+            runTar("$fout -u")
         }
         File(fout).writeText("1.txt 1,2.txt 2a!12")
         assertThrows(Exception::class.java) {
-            Tar("$fout -u".split(' ').toTypedArray())
+            runTar("$fout -u")
         }
         File(fout).delete()
     }
