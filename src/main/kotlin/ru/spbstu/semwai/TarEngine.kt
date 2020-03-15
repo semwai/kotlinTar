@@ -5,23 +5,21 @@ import java.io.File
 //Задача класса - взять список файлов и запаковать их в 1
 class TarEngine(private val files: List<String>, private val outputFile: String) {
 
-    private val metadata = mutableListOf<Schema>()
+    private lateinit var metadata: List<Schema>
 
     fun run() {
-        files.forEach {
+        metadata = files.map {
             with(File(it)) {
-                metadata += Schema(this.name, this.length())
+                Schema(this.name, this.length())
             }
         }
         with(File(outputFile)) {
             createNewFile()
-            writeText(
-                metadata.fold("") { v: String, it: Schema ->
-                    v + it.toString()
-                }.dropLast(1) + '!'
+            writeBytes(
+                metadata.joinToString(",").toByteArray() + 0
             )
             files.forEach {
-                appendText(File(it).readText())
+                appendBytes(File(it).readBytes())
             }
         }
     }

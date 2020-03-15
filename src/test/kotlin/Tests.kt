@@ -18,7 +18,7 @@ class Tests {
     @Test
     fun `🐷 проверка работы базового функционала`() {
         with(File(f1)) {
-            writeText("abcdef")
+            writeText("abcdefРусские буквы для проверки")
         }
         with(File(f2)) {
             val str = StringBuilder()
@@ -35,7 +35,7 @@ class Tests {
         File(f2).delete()
         File(f3).delete()
         runTar("$fout -u")
-        assertEquals("abcdef", File(f1).readText())
+        assertEquals("abcdefРусские буквы для проверки", File(f1).readText())
         assertEquals("123456", File(f3).readText())
         File(f1).delete()
         File(f2).delete()

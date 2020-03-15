@@ -9,19 +9,28 @@ class UnTarEngine(private val inputFIle: String) {
     private val metadata = mutableListOf<Schema>()
 
     fun run() {
-        val data = File(inputFIle).readText()
-        val parse = data
-            .split("!")
-            .firstOrNull() ?: throw IllegalArgumentException("Invalid file")
-        var offset = parse.length + 1
+        val data = File(inputFIle).readBytes()
+
+        val rawHeader = mutableListOf<Byte>()
+        for (byte in data){
+            if (byte.toInt() != 0){
+                rawHeader.add(byte)
+            }
+            else
+                break
+        }
+        if (rawHeader.size == data.size)
+            throw IllegalArgumentException("Invalid file")
+        val parse = String(rawHeader.toByteArray())
+        var offset = rawHeader.size + 1
         metadata += parseSchema(parse)
         metadata.forEach {
             println("Extract file ${it.name} with size ${it.length} byte")
-            with(File(it.name)) {
-                writeText(data.drop(offset).take(it.length.toInt()))
+            with(File(it.name)){
+                createNewFile()
+                writeBytes(data.drop(offset).take(it.length.toInt()).toByteArray())
             }
             offset += it.length.toInt()
         }
-
     }
 }
